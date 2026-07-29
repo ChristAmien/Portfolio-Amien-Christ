@@ -1,28 +1,44 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "motion/react";
+import { useRef, useState } from "react";
+import {
+    motion,
+    AnimatePresence,
+    useScroll,
+    useTransform,
+    useMotionValue,
+    useSpring,
+    useVelocity,
+} from "motion/react";
 
 export const ProjectCard = ({ project, index }) => {
     const cardRef = useRef(null);
+    const [isHovered, setIsHovered] = useState(false);
 
-    // Scroll-linked 3D transform (continu, pas juste au "reveal")
     const { scrollYProgress } = useScroll({
         target: cardRef,
         offset: ["start end", "end start"],
     });
 
+    // --- Transform lié à la POSITION du scroll ---
     const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [20, 0, -20]);
     const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.85, 1, 0.85]);
     const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
     const y = useTransform(scrollYProgress, [0, 0.5, 1], [80, 0, -80]);
 
-    // Tilt 3D au survol de la souris
+    // --- Transform lié à la VITESSE du scroll (effet vague) ---
+    const scrollVelocity = useVelocity(scrollYProgress);
+    const smoothVelocity = useSpring(scrollVelocity, { stiffness: 300, damping: 40 });
+    const phase = index % 2 === 0 ? 1 : -1;
+    const velocitySkew = useTransform(smoothVelocity, [-2, 0, 2], [-6 * phase, 0, 6 * phase]);
+    const velocityZ = useTransform(smoothVelocity, [-2, 2], [-40, -40]);
+
+    // --- Tilt 3D au survol de la souris (appliqué uniquement sur l'image) ---
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
-    const rotateYHover = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), {
+    const rotateYHover = useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), {
         stiffness: 150,
         damping: 20,
     });
-    const rotateXHover = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), {
+    const rotateXHover = useSpring(useTransform(mouseY, [-0.5, 0.5], [12, -12]), {
         stiffness: 150,
         damping: 20,
     });
@@ -36,101 +52,119 @@ export const ProjectCard = ({ project, index }) => {
     const handleMouseLeave = () => {
         mouseX.set(0);
         mouseY.set(0);
+        setIsHovered(false);
     };
 
     return (
         <motion.div
             ref={cardRef}
-            style={{ rotateX, scale, opacity, y, transformPerspective: 1200 }}
+            style={{
+                rotateX,
+                scale,
+                opacity,
+                y,
+                skewY: velocitySkew,
+                z: velocityZ,
+                transformPerspective: 1200,
+            }}
             className={`flex flex-col items-center gap-10 lg:flex-row ${
                 index % 2 !== 0 ? "lg:flex-row-reverse" : ""
             }`}
         >
-            {/* IMAGE avec tilt 3D au survol */}
+            {/* --- Bloc image façon "plane" --- */}
             <motion.div
+                onMouseEnter={() => setIsHovered(true)}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
                 style={{
-                    rotateY: rotateYHover,
                     rotateX: rotateXHover,
-                    transformPerspective: 800,
+                    rotateY: rotateYHover,
+                    transformPerspective: 1000,
                 }}
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.4 }}
-                className="group relative overflow-hidden rounded-3xl border border-neutral-800 shadow-2xl shadow-purple-500/10"
+                className="group relative w-full max-w-xl overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/60 shadow-2xl shadow-black/40 lg:w-1/2"
             >
-                <img
-                    src={project.image}
-                    alt={project.title}
-                    className="h-[320px] w-[520px] object-cover transition duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70" />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            </motion.div>
+                <div className="relative aspect-video w-full overflow-hidden">
+                    <img
+                        src={project.image}
+                        alt={project.title}
+                        draggable={false}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
 
-            {/* TEXTE */}
-            <div className="max-w-xl">
-                <motion.h2
-                    initial={{ opacity: 0, x: 40 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.2 }}
-                    viewport={{ once: true }}
-                    className="mb-5 text-3xl font-bold text-white"
-                >
-                    {project.title}
-                </motion.h2>
-
-                <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.4 }}
-                    viewport={{ once: true }}
-                    className="mb-6 leading-8 text-neutral-400"
-                >
-                    {project.description}
-                </motion.p>
-
-                <div className="flex flex-wrap gap-3">
-                    {project.technologies.map((tech, i) => (
-                        <motion.span
-                            key={i}
-                            initial={{ opacity: 0, scale: 0.5 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.5 + i * 0.08 }}
-                            viewport={{ once: true }}
-                            whileHover={{ scale: 1.12 }}
-                            className="rounded-full border border-purple-500/30 bg-purple-500/10 px-4 py-2 text-sm font-medium text-purple-300 backdrop-blur-md"
-                        >
-                            {tech}
-                        </motion.span>
-                    ))}
+                    {/* Overlay + label qui apparaît au survol */}
+                    <AnimatePresence>
+                        {isHovered && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="absolute inset-0 flex items-end bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6"
+                            >
+                                <motion.span
+                                    initial={{ y: 20, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    exit={{ y: 20, opacity: 0 }}
+                                    transition={{ duration: 0.3, delay: 0.05 }}
+                                    className="text-lg font-semibold tracking-wide text-white"
+                                >
+                                    {project.title}
+                                </motion.span>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
 
-                <div className="mt-8 flex flex-wrap gap-4">
-                    <motion.a
-                        href={project.demoUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, delay: 0.6 }}
-                        whileHover={{ scale: 1.03 }}
-                        className="rounded-full bg-purple-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-purple-400"
-                    >
-                        Voir la démo
-                    </motion.a>
-                    <motion.a
-                        href={project.sourceUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, delay: 0.7 }}
-                        whileHover={{ scale: 1.03 }}
-                        className="rounded-full border border-neutral-700 bg-neutral-900/70 px-6 py-3 text-sm font-semibold text-white transition hover:border-purple-500 hover:text-purple-300"
-                    >
-                        Code source
-                    </motion.a>
+                {/* Index numéroté façon "plane-index" */}
+                <div className="absolute right-4 top-4 rounded-full border border-neutral-700 bg-black/50 px-3 py-1 text-xs font-mono text-purple-400 backdrop-blur-sm">
+                    {String(index + 1).padStart(2, "0")}
+                </div>
+            </motion.div>
+
+            {/* --- Bloc contenu texte --- */}
+            <div className="flex w-full flex-col gap-4 lg:w-1/2">
+                <h3 className="text-2xl font-bold text-white md:text-3xl">
+                    {project.title}
+                </h3>
+
+                <p className="text-sm leading-relaxed text-neutral-400 md:text-base">
+                    {project.description}
+                </p>
+
+                {project.technologies?.length > 0 && (
+                    <div className="flex flex-wrap gap-2 pt-1">
+                        {project.technologies.map((tech, i) => (
+                            <span
+                                key={i}
+                                className="rounded-full border border-purple-500/30 bg-purple-500/10 px-3 py-1 text-xs font-medium text-purple-300"
+                            >
+                                {tech}
+                            </span>
+                        ))}
+                    </div>
+                )}
+
+                <div className="flex items-center gap-4 pt-2">
+                    {project.demoUrl && (
+                        <a
+                            href={project.demoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="rounded-full bg-purple-500 px-5 py-2 text-sm font-semibold text-white transition hover:bg-purple-600"
+                        >
+                            Voir le projet
+                        </a>
+                    )}
+                    {project.sourceUrl && (
+                        <a
+                            href={project.sourceUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-sm font-medium text-neutral-400 underline underline-offset-4 transition hover:text-white"
+                        >
+                            Code source
+                        </a>
+                    )}
                 </div>
             </div>
         </motion.div>

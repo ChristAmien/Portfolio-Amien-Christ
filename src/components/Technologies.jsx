@@ -1,6 +1,20 @@
 import { FaDocker, FaPython,FaCss3, FaGithub, FaGitAlt, FaJava,FaHtml5} from "react-icons/fa"
 import { SiFlask, SiSupabase, SiFlutter, SiSpringboot, SiMysql, SiPostgresql, SiTailwindcss, SiJavascript } from "react-icons/si"
 import { RiReactjsLine } from "react-icons/ri"
+import { motion } from "framer-motion"
+
+const iconVariants = (duration) => ({
+    initial: { y: -10},
+    animal: {
+        y: [10, -10],
+        transition: {
+            duration: duration,
+            ease: "linear",
+            repeat: Infinity,
+            repeatType: "reverse",
+        }
+    }
+})
 
 const technologies = [
     {name: "React", icon: RiReactjsLine, color: "text-cyan-400"},
