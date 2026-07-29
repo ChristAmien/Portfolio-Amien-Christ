@@ -62,6 +62,12 @@ export function Navbar() {
                     >
                         Experiences
                     </a>
+                    <a
+                        href="#contacts"
+                        className="font-medium text-black transition hover:text-gray-500"
+                    >
+                        Contacts
+                    </a>
                 </div>
 
                 {/* Social Links */}
@@ -88,7 +94,7 @@ export function Navbar() {
 
                         <a
                             href="#"
-                            className="transition hover:-translate-y-1 hover:text-gray-300"
+                            className="transition hover:-translate-y-1 hover:text-blue-400"
                         >
                             <FaTwitter />
                         </a>
@@ -102,7 +108,7 @@ export function Navbar() {
 
                         <a
                             href="#"
-                            className="transition hover:-translate-y-1 hover:text-gray-300"
+                            className="transition hover:-translate-y-1 hover:text-pink-700"
                         >
                             <FaTiktok />
                         </a>
