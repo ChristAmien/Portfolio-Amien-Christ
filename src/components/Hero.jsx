@@ -1,9 +1,9 @@
 import { HERO_CONTENT } from "../constants"
-import profil from "../assets/amien christ.png"
+import profil from "../assets/christ amien.png"
 
 export const Hero = () => {
     return (
-        <div className="border-b border-neutral-900 pb-4 pt-32 lg:mb-35">
+        <div id="acceuil" className="border-b border-neutral-900 pb-4 pt-32 lg:mb-35">
             <div className="flex flex-wrap">
                 <div className="w-full lg:w-1/2">
                     <div className="flex flex-col items-center lg:items-start">

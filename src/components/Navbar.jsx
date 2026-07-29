@@ -24,6 +24,13 @@ export function Navbar() {
                 <div className="hidden flex-1 flex-nowrap items-center justify-center gap-4 overflow-x-auto whitespace-nowrap md:flex lg:gap-8">
 
                     <a
+                        href="#acceuil"
+                        className="font-medium text-black transition hover:text-gray-500"
+                    >
+                        Acceuil
+                    </a>
+
+                    <a
                         href="#apropos"
                         className="font-medium text-black transition hover:text-gray-500"
                     >
