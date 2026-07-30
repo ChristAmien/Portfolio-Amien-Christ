@@ -125,6 +125,18 @@ export const CERTIFICATIONS = [
         date: "2026",
         file: "/certificates/Boostez_votre_productivit_ave_Certificate.pdf",
     },
+    {
+        title: "Microsoft PowerPoint",
+        issuer: "Coursera",
+        date: "2026",
+        file: "/certificates/Coursera GKFXJRCP95DG.pdf",
+    },
+    {
+        title: "Microsoft Word",
+        issuer: "Coursera",
+        date: "2026",
+        file: "/certificates/Coursera AK8PUBKH9J1F.pdf",
+    },
 ];
 
 export const CONTACT = {
