@@ -14,6 +14,9 @@ const NAV_LINKS = [
     { label: 'Contacts', href: '#contacts' },
 ]
 
+// Chemin du CV : servi depuis /public/documents/, donc accessible via /documents/... (jamais "public/" dans le chemin)
+const CV_PATH = '/documents/CV-Christ-Amien.pdf'
+
 export function Navbar() {
     const [open, setOpen] = useState(false)
 
@@ -101,8 +104,10 @@ export function Navbar() {
                     </button>
 
                     <a
-                        href="../public/CV-Christ-Amien.pdf"
-                        download
+                        href={CV_PATH}
+                        target="_blank"
+                        rel="noreferrer"
+                        download="CV-Christ-Amien.pdf"
                         className="flex items-center gap-2 rounded-full border-[3px] border-black bg-black px-4 py-2.5 text-sm font-semibold text-white shadow-[0_4px_12px_rgba(0,0,0,0.2)] transition hover:bg-gray-800"
                     >
                         <FaDownload size={13} />
@@ -160,8 +165,10 @@ export function Navbar() {
                             initial={{ opacity: 0, y: 15 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.4 }}
-                            href="../public/CV-Christ-Amien.pdf"
-                            download
+                            href={CV_PATH}
+                            target="_blank"
+                            rel="noreferrer"
+                            download="CV-Christ-Amien.pdf"
                             className="mx-auto mt-4 flex w-fit items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-gray-200"
                         >
                             <FaDownload size={14} />

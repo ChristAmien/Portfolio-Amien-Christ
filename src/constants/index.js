@@ -70,8 +70,8 @@ export const PROJECTS = [
         description:
             "Un portfolio moderne présentant mes projets en développement web, mobile et intelligence artificielle. J'y partage des solutions performantes, des interfaces soignées et des applications conçues pour répondre à des besoins concrets tout en offrant une expérience utilisateur fluide.",
         technologies: ["REACT", "TAILWINDCSS", "JAVASCRIPT", "FRAMER"],
-        demoUrl: "#",
-        sourceUrl: "#",
+        demoUrl: "https://portfolio-amien-christ.vercel.app/",
+        sourceUrl: "https://github.com/ChristAmien/Portfolio-Amien-Christ",
     },
 
 ];
