@@ -64,7 +64,7 @@ const Contact = () => {
     };
 
     return (
-        <section id="contact" className="border-b border-neutral-900 pb-24">
+        <section id="contacts" className="border-b border-neutral-900 pb-24">
             <motion.h2
                 whileInView={{ opacity: 1, y: 0 }}
                 initial={{ opacity: 0, y: -50 }}

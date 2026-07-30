@@ -64,7 +64,7 @@ export function Navbar() {
                             </a>
                             <a
                                 href="https://x.com/christ_amien"
-                                className="transition hover:-translate-y-1 hover:text-blue-400"
+                                className="transition hover:-translate-y-1 hover:text-gray-400"
                             >
                                 <FaXTwitter />
                             </a>
