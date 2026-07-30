@@ -76,6 +76,53 @@ export const PROJECTS = [
 
 ];
 
+// Place tes fichiers PDF dans /public/certifications/ puis référence-les
+// ci-dessous avec le chemin "/certifications/nom-du-fichier.pdf"
+export const CERTIFICATIONS = [
+    {
+        title: "Certification VIBEATHON",
+        issuer: "Vibeathon",
+        date: "2026",
+        file: "../public/certificates/certificat-vibeathon-2026.pdf",
+    },
+    {
+        title: "Getting started with Microsoft Office 365",
+        issuer: "Coursera",
+        date: "2026",
+        file: "../public/certificates/Coursera DTUY7BEYFJC6.pdf",
+    },
+    {
+        title: "IA Générative",
+        issuer: "MTN Skills Academy",
+        date: "2026",
+        file: "../public/certificates/IA_g_n_rative_Certificate.pdf",
+    },
+    {
+        title: "IA Responsable",
+        issuer: "MTN Skills Academy",
+        date: "2026",
+        file: "../public/certificates/IA_responsable_Certificate.pdf",
+    },
+    {
+        title: "IA Pour Tous",
+        issuer: "MTN Skills Academy",
+        date: "2026",
+        file: "../public/certificates/L_IA_pour_tous_Certificate.pdf",
+    },
+    {
+        title: "Bases de l'IA Générative",
+        issuer: "MTN Skills Academy",
+        date: "2026",
+        file: "../public/certificates/Les_bases_de_l_IA_Certificate.pdf",
+    },
+    {
+        title: "Recherche sur Internet",
+        issuer: "MTN Skills Academy",
+        date: "2026",
+        file: "../public/certificates/Recherche_sur_Internet_et_au_d_Certificate.pdf",
+    },
+];
+
 export const CONTACT = {
     address: "Bingerville, Abidjan, Côte d'Ivoire ",
     phoneNo: "+225 0706528067 ",

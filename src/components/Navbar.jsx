@@ -1,10 +1,10 @@
 import logo from '../assets/logo_amien.png'
 import { FaLinkedin } from 'react-icons/fa'
 import { FaGithub } from 'react-icons/fa'
-import { FaTwitter } from 'react-icons/fa'
 import { FaInstagram } from 'react-icons/fa'
 import { FaTiktok } from 'react-icons/fa'
 import { FaFacebook } from 'react-icons/fa'
+import { FaXTwitter } from 'react-icons/fa6'
 
 export function Navbar() {
     return (
@@ -75,7 +75,7 @@ export function Navbar() {
                     <div className="flex items-center justify-center gap-5 text-2xl">
 
                         <a
-                            href="https://linkedin.com"
+                            href="https://www.linkedin.com/in/amien-christ-143801367"
                             target="_blank"
                             rel="noreferrer"
                             className="transition hover:-translate-y-1 hover:text-blue-400"
@@ -84,7 +84,7 @@ export function Navbar() {
                         </a>
 
                         <a
-                            href="https://github.com"
+                            href="https://github.com/ChristAmien"
                             target="_blank"
                             rel="noreferrer"
                             className="transition hover:-translate-y-1 hover:text-gray-300"
@@ -93,28 +93,28 @@ export function Navbar() {
                         </a>
 
                         <a
-                            href="#"
+                            href="https://x.com/christ_amien"
                             className="transition hover:-translate-y-1 hover:text-blue-400"
                         >
-                            <FaTwitter />
+                            <FaXTwitter />
                         </a>
 
                         <a
-                            href="#"
+                            href="https://www.instagram.com/christ.vmienn2?igsh=MTV4YW4xa2Vlc2J6ZQ=="
                             className="transition hover:-translate-y-1 hover:text-pink-500"
                         >
                             <FaInstagram />
                         </a>
 
                         <a
-                            href="#"
+                            href="https://www.tiktok.com/@christ.vmien13?_r=1&_t=ZS-98S3s5nxvyH"
                             className="transition hover:-translate-y-1 hover:text-pink-700"
                         >
                             <FaTiktok />
                         </a>
 
                         <a
-                            href="#"
+                            href="https://www.facebook.com/profile.php?id"
                             className="transition hover:-translate-y-1 hover:text-blue-500"
                         >
                             <FaFacebook />
