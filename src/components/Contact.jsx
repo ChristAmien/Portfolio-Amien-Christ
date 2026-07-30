@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { CONTACT } from "../constants";
 
@@ -9,8 +9,17 @@ const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 const BUDGETS = ["< 500K F", "500K - 1M", "1M - 2M", "2M - 5M", "+ 5M"];
 
+// Animation de vol au repos (boucle infinie)
+const IDLE_ANIMATION = {
+    y: [0, -10, 0],
+    x: [0, 8, 0],
+    rotate: [0, 6, 0],
+    opacity: 1,
+    transition: { duration: 2.4, repeat: Infinity, ease: "easeInOut" },
+};
+
 // Illustration originale : personnage lançant un avion en papier
-const PaperPlaneIllustration = () => (
+const PaperPlaneIllustration = ({ controls }) => (
     <motion.svg
         viewBox="0 0 320 300"
         className="h-48 w-48 text-neutral-500 sm:h-56 sm:w-56"
@@ -29,8 +38,8 @@ const PaperPlaneIllustration = () => (
         <path d="M55 255h110l-14 30H72z" />
         <path d="M75 255v-40h70v40" />
         <motion.g
-            animate={{ y: [0, -10, 0], x: [0, 8, 0], rotate: [0, 6, 0] }}
-            transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+            animate={controls}
+            initial={{ y: 0, x: 0, rotate: 0, opacity: 1 }}
             className="text-purple-400"
         >
             <path d="M195 60l70-35-30 65-12-22z" />
@@ -43,6 +52,12 @@ const Contact = () => {
     const formRef = useRef(null);
     const [budget, setBudget] = useState(null);
     const [status, setStatus] = useState(null); // null | "sending" | "sent" | "error"
+    const planeControls = useAnimation();
+
+    // Lance l'animation de vol au repos dès le montage du composant
+    useEffect(() => {
+        planeControls.start(IDLE_ANIMATION);
+    }, [planeControls]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -52,10 +67,23 @@ const Contact = () => {
             .sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, {
                 publicKey: PUBLIC_KEY,
             })
-            .then(() => {
+            .then(async () => {
+                // L'avion s'envole hors de l'écran
+                await planeControls.start({
+                    x: 300,
+                    y: -200,
+                    rotate: 25,
+                    opacity: 0,
+                    transition: { duration: 1, ease: "easeIn" },
+                });
+
                 setStatus("sent");
                 formRef.current.reset();
                 setBudget(null);
+
+                // Remise à zéro puis reprise de l'animation de vol normal
+                planeControls.set({ x: 0, y: 0, rotate: 0, opacity: 1 });
+                planeControls.start(IDLE_ANIMATION);
             })
             .catch((err) => {
                 console.error("EmailJS error:", err);
@@ -124,9 +152,9 @@ const Contact = () => {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="mt-10 flex justify-center"
+                        className="mt-10 flex justify-center overflow-hidden"
                     >
-                        <PaperPlaneIllustration />
+                        <PaperPlaneIllustration controls={planeControls} />
                     </motion.div>
                 </motion.div>
 
