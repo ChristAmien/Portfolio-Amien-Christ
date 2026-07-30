@@ -119,6 +119,12 @@ export const CERTIFICATIONS = [
         date: "2026",
         file: "/certificates/Recherche_sur_Internet_et_au_d_Certificate.pdf",
     },
+    {
+        title: "Booster la productivité avec COPILOT",
+        issuer: "MTN Skills Academy",
+        date: "2026",
+        file: "/certificates/Boostez_votre_productivit_ave_Certificate.pdf",
+    },
 ];
 
 export const CONTACT = {
