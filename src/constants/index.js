@@ -1,4 +1,4 @@
-import project1 from "../assets/projects/project-1.jpg";
+import project1 from "../assets/projects/image.png";
 import project2 from "../assets/projects/project-2.jpg";
 import project3 from "../assets/projects/project-3.jpg";
 import project4 from "../assets/projects/project-4.png";
@@ -32,10 +32,10 @@ export const PROJECTS = [
         title: "Site E-Restaurant",
         image: project1,
         description:
-            "MoonKitch est une plateforme de restauration en ligne qui permet aux utilisateurs de consulter le menu d'un restaurant, de découvrir les plats proposés et de commander facilement grâce à une interface moderne, rapide et intuitive.",
-        technologies: ["HTML", "CSS", "PHP", "JAVASCRIPT", "MongoDB"],
-        demoUrl: "#",
-        sourceUrl: "#",
+            "Dinevoria est une plateforme de restauration en ligne qui permet aux utilisateurs de consulter le menu d'un restaurant, de découvrir les plats proposés et de commander facilement grâce à une interface moderne, rapide et intuitive.",
+        technologies: ["REACT", "TAILWINDCSS", "FRAMER"],
+        demoUrl: "https://dinevoria.vercel.app/",
+        sourceUrl: "https://github.com/ChristAmien/Dinevoria",
     },
     {
         title: "Application de Gestion de Tâches",
