@@ -1,7 +1,7 @@
 import project1 from "../assets/projects/project-1.jpg";
 import project2 from "../assets/projects/project-2.jpg";
 import project3 from "../assets/projects/project-3.jpg";
-import project4 from "../assets/projects/project-4.jpg";
+import project4 from "../assets/projects/project-4.png";
 import project5 from "../assets/projects/Coffee.png"
 import project6 from "../assets/projects/project-6.jpg"
 
@@ -29,11 +29,11 @@ export const EXPERIENCES = [
 
 export const PROJECTS = [
     {
-        title: "Site E-commerce",
+        title: "Site E-Restaurant",
         image: project1,
         description:
-            "Site e-commerce complet permettant aux utilisateurs de parcourir les produits, de les ajouter au panier, de créer un compte et de passer leurs commandes en toute simplicité.",
-        technologies: ["HTML", "CSS", "React", "Node.js", "MongoDB"],
+            "MoonKitch est une plateforme de restauration en ligne qui permet aux utilisateurs de consulter le menu d'un restaurant, de découvrir les plats proposés et de commander facilement grâce à une interface moderne, rapide et intuitive.",
+        technologies: ["HTML", "CSS", "PHP", "JAVASCRIPT", "MongoDB"],
         demoUrl: "#",
         sourceUrl: "#",
     },
@@ -47,13 +47,13 @@ export const PROJECTS = [
         sourceUrl: "#",
     },
     {
-        title: "Plateforme de Blog",
+        title: "Plateforme de E-learning",
         image: project4,
         description:
-            "Plateforme permettant de créer, publier et gérer des articles de blog, avec un éditeur de texte, un espace de commentaires et la gestion des profils utilisateurs.",
-        technologies: ["HTML", "CSS", "Vue.js", "Express", "MySQL"],
-        demoUrl: "#",
-        sourceUrl: "#",
+            "SkillPath est une plateforme d'e-learning qui propose des parcours de formation structurés, des cours de qualité et des outils de suivi de progression pour aider chacun à développer ses compétences et atteindre ses objectifs d'apprentissage efficacement.",
+        technologies: ["REACT", "TAILWINDCSS"],
+        demoUrl: "https://skillpath-lac-eta.vercel.app/",
+        sourceUrl: "https://github.com/ChristAmien/Skillpath",
     },
     {
         title: "Am'Coffee",
@@ -61,8 +61,8 @@ export const PROJECTS = [
         description:
             "Site vitrine moderne dédié à un café, mettant en valeur les boissons, les spécialités de la maison, les promotions et les informations essentielles, tout en offrant une expérience utilisateur conviviale et immersive.",
         technologies: ["HTML", "CSS", "JAVASCRIPT"],
-        demoUrl: "#",
-        sourceUrl: "#",
+        demoUrl: "https://christamien.github.io/AM-Coofee/",
+        sourceUrl: "https://github.com/ChristAmien/AM-Coofee",
     },
     {
         title: "Portfolio AMIEN",
