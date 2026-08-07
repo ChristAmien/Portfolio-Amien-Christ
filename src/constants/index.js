@@ -1,6 +1,5 @@
 import project1 from "../assets/projects/image.png";
 import project2 from "../assets/projects/project-2.jpg";
-import project3 from "../assets/projects/project-3.jpg";
 import project4 from "../assets/projects/project-4.png";
 import project5 from "../assets/projects/Coffee.png"
 import project6 from "../assets/projects/project-6.jpg"
@@ -18,6 +17,13 @@ export const EXPERIENCES = [
         description: `Simulation des opérations bancaires (comptes, clients, transactions) en Java. Développement d'une API REST avec Spring Boot incluant CRUD et gestion des avis utilisateurs, connectée à une base de données. Tests des requêtes API avec Postman.`,
         technologies: ["Java", "Spring Boot", "REST API", "Postman"],
     },
+    /*{
+        year: "2026",
+        role: "Développeur",
+        company: "OIJD-CIV",
+        description: `Développeur travaillant sur la maintenance de site web de l'OIJD, veillant à la sécurité du site web et à la fiabilité`,
+        technologies: ["Java", "Spring Boot", "TYPESCRIPT", "TAILWINDCSS"],
+    },*/
     {
         year: "2025 - 2026",
         role: "Développeur Web",
@@ -90,6 +96,12 @@ export const CERTIFICATIONS = [
         file: "/certificates/Coursera%20DTUY7BEYFJC6.pdf", // espace encodé en %20
     },
     {
+        title: "Introduction to SoftWare Developpement",
+        issuer: "Coursera and Amazon",
+        date: "2026",
+        file: "/certificates/Coursera LU6MGU6FJB48.pdf", // espace encodé en %20
+    },
+    {
         title: "IA Générative",
         issuer: "MTN Skills Academy",
         date: "2026",
@@ -136,6 +148,12 @@ export const CERTIFICATIONS = [
         issuer: "Coursera",
         date: "2026",
         file: "/certificates/Coursera AK8PUBKH9J1F.pdf",
+    },
+    {
+        title: "A2 English ",
+        issuer: "FreeCodeCamp",
+        date: "2026",
+        file: "/certificates/A2 English certification.pdf",
     },
 ];
 
